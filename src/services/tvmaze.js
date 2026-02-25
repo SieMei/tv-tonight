@@ -33,6 +33,14 @@ export const tvService = {
       .sort((a, b) => b.rating.average - a.rating.average)
       .slice(0, limit)
   },
+  async getShowsByType(type, limit = 12) {
+    const shows = await this.getShows(0)
+    return shows
+      .filter((show) => show.type === type)
+      .filter((show) => show.rating?.average)
+      .sort((a, b) => b.rating.average - a.rating.average)
+      .slice(0, limit)
+  },
 
   async getShowsByMultipleGenres(genres, showsPerGenre = 12) {
     const shows = await this.getShows(0)

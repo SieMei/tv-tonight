@@ -1,16 +1,27 @@
+<script setup>
+import HomeView from './components/HomeView.vue'
+import AppFooter from './components/AppFooter.vue'
+</script>
+
 <template>
-  <div class="dummytext">
-    <h1>This will be the home page for TV Tonight</h1>
-    <p>It will display a list of TV shows and their details.</p>
-  </div>
+  <main class="app-container">
+    <HomeView />
+  </main>
+  <AppFooter />
 </template>
 
-<script setup></script>
+<style scoped>
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-<style>
-.dummytext {
-  font-family: sans-serif;
-  text-align: center;
-  margin-top: 50px;
+.app-container {
+  flex: 1;
+  min-height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
 }
 </style>
