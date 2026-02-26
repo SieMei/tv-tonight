@@ -86,6 +86,38 @@ onMounted(() => {
 
     <div v-else class="dashboard-content">
       <AppHeader @search="handleSearch" />
+
+      <div v-if="isSearching" class="search-status">
+        <p>Searching for "{{ currentQuery }}"...</p>
+      </div>
+
+      <div v-else-if="hasSearched" class="search-results-area">
+        <div class="search-header">
+          <h3>Results for "{{ currentQuery }}"</h3>
+          <button class="clear-btn" @click="clearSearch">Clear Search</button>
+        </div>
+
+        <div v-if="searchResults.length > 0" class="search-list">
+          <div
+            v-for="show in searchResults"
+            :key="show.id"
+            class="search-item"
+            @click="openModal(show)"
+          >
+            <span class="result-title">{{ show.name }}</span>
+            <span class="result-year" v-if="show.premiered">
+              ({{ new Date(show.premiered).getFullYear() }})
+            </span>
+          </div>
+        </div>
+
+        <div v-else class="no-results">
+          <p>No titles found for "{{ currentQuery }}".</p>
+        </div>
+
+        <hr class="section-divider" />
+      </div>
+
       <FeaturedShow
         v-if="featuredShow"
         :show="featuredShow"
@@ -94,29 +126,7 @@ onMounted(() => {
       />
     </div>
 
-    <div v-if="isSearching" class="search-status">
-      <p>Searching for "{{ currentQuery }}"...</p>
-    </div>
-
-    <div v-else-if="hasSearched" class="search-results-area">
-      <div class="search-header">
-        <h3>Results for "{{ currentQuery }}"</h3>
-        <button class="clear-btn" @click="clearSearch">Clear Search</button>
-      </div>
-
-      <ShowCarousel
-        v-if="searchResults.length > 0"
-        title=""
-        :shows="searchResults"
-        @select-show="openModal"
-      />
-
-      <div v-else class="no-results">
-        <p>Sorry, we couldn't find any TV shows matching that name.</p>
-      </div>
-
-      <hr class="section-divider" />
-    </div>
+    <!-- <hr class="section-divider" /> -->
 
     <div class="genre-lists">
       <ShowCarousel
@@ -159,12 +169,46 @@ onMounted(() => {
   background-color: #1a1a1a; /* Slightly lighter dark background to make it stand out */
 }
 
+.search-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.search-item:hover {
+  background-color: #252525; /* Subtle highlight on hover */
+}
+
+.result-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.result-year {
+  font-size: 0.9rem;
+  color: #888;
+}
+
 .search-header {
+  max-width: 800px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  margin-bottom: 1rem;
+  margin: 0 auto 1.5rem auto;
 }
 
 .search-header h3 {

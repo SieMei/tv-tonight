@@ -24,7 +24,6 @@ const emit = defineEmits(['close'])
           <div class="meta">
             <span class="rating"> &#9733; {{ show.rating?.average || 'N/A' }}</span>
             <span class="runtime" v-if="show.runtime">{{ show.runtime }} min</span>
-            <span class="status">{{ show.status }}</span>
           </div>
 
           <div class="genres">

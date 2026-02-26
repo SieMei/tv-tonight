@@ -44,12 +44,8 @@ const emit = defineEmits(['view-details'])
 .content-overlay {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(18, 18, 18, 1) 0%,
-    rgba(18, 18, 18, 0.4) 40%,
-    transparent 100%
-  );
+  background: rgba(27, 26, 26, 0.5);
+
   display: flex;
   align-items: flex-end;
   padding: 4rem 5%;
