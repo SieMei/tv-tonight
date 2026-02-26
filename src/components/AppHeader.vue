@@ -39,11 +39,12 @@ const onSearch = (query) => {
 
 .logo h1 {
   font-family: 'Century Gothic', 'Futura', sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 500;
   letter-spacing: 0.2rem;
   margin: 0;
   color: #121212;
+  white-space: nowrap;
 }
 
 .tagline {
@@ -52,9 +53,10 @@ const onSearch = (query) => {
   margin-top: 0.5rem;
   font-family: 'Georgia', 'Palatino', serif;
   font-style: italic;
-  font-size: 1.3rem;
+  font-size: clamp(0.9rem, 4vw, 1.3rem);
   color: #5f7d95;
   letter-spacing: 0.05rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
