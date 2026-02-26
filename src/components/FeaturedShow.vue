@@ -18,6 +18,7 @@ const emit = defineEmits(['view-details'])
   >
     <div class="content-overlay">
       <div class="text-content">
+        <span class="recommendation-tag">EDITOR'S PICK</span>
         <h1 class="title">{{ show.name }}</h1>
         <div class="meta">
           <span class="rating"> &#9733; {{ show.rating?.average || 'N/A' }}</span>
@@ -55,6 +56,18 @@ const emit = defineEmits(['view-details'])
   max-width: 700px;
 }
 
+.recommendation-tag {
+  display: inline-block;
+  background-color: #5f7d95;
+  color: white;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: 2px;
+  margin-bottom: 1.6rem;
+}
+
 .title {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   margin: 0 0 0.5rem 0;
@@ -73,12 +86,6 @@ const emit = defineEmits(['view-details'])
   line-height: 1.6;
   color: #dddddd;
   margin-bottom: 2rem;
-  /* Truncate text after 3 lines */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .info-button {

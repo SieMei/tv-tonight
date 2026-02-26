@@ -90,7 +90,7 @@ onMounted(() => {
       <div v-else-if="hasSearched" class="search-results-area">
         <div class="search-header">
           <h3>Results for "{{ currentQuery }}"</h3>
-          <button class="clear-btn" @click="clearSearch">Clear Search</button>
+          <button class="close-btn" @click="clearSearch">&times;</button>
         </div>
 
         <div v-if="searchResults.length > 0" class="search-list">
@@ -100,10 +100,17 @@ onMounted(() => {
             class="search-item"
             @click="openModal(show)"
           >
-            <span class="result-title">{{ show.name }}</span>
-            <span class="result-year" v-if="show.premiered">
-              ({{ new Date(show.premiered).getFullYear() }})
-            </span>
+            <div class="result-thumbnail">
+              <img v-if="show.image" :src="show.image.medium" :alt="show.name" loading="lazy" />
+              <div v-else class="no-thumb">N/A</div>
+            </div>
+
+            <div class="result-text">
+              <span class="result-title">{{ show.name }}</span>
+              <span class="result-year" v-if="show.premiered">
+                ({{ new Date(show.premiered).getFullYear() }})
+              </span>
+            </div>
           </div>
         </div>
 
@@ -159,8 +166,9 @@ onMounted(() => {
 }
 
 .search-results-area {
-  padding-top: 2rem;
-  background-color: #1a1a1a;
+  padding: 2rem 0;
+  background-color: #0a0a0a;
+  border-bottom: 2px solid #333;
 }
 
 .search-list {
@@ -172,12 +180,12 @@ onMounted(() => {
 }
 
 .search-item {
-  padding: 12px 15px;
+  padding: 8px 15px;
   border-bottom: 1px solid #333;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   transition: background-color 0.2s;
 }
 
@@ -185,15 +193,34 @@ onMounted(() => {
   background-color: #252525;
 }
 
-.result-title {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #ffffff;
+.result-thumbnail {
+  width: 50px;
+  height: 70px;
+  background-color: #222;
+  flex-shrink: 0; /* Prevents the image from being squeezed */
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.result-year {
-  font-size: 0.9rem;
-  color: #888;
+.result-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-thumb {
+  font-size: 0.7rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.result-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .search-header {
@@ -212,25 +239,18 @@ onMounted(() => {
   margin: 0;
 }
 
-.clear-btn {
-  background-color: #ff4757;
-  color: white;
+.close-btn {
+  background: none;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  color: white;
+  font-size: 2.5rem;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-.clear-btn:hover {
-  background-color: #ff6b81;
 }
 
 .section-divider {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, transparent, #333, transparent);
-  margin: 2rem 0;
+  margin: 3rem 0;
 }
 </style>
