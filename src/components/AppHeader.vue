@@ -62,8 +62,5 @@ const onSearch = (query) => {
     flex-direction: column;
     text-align: center;
   }
-  .header-spacer {
-    display: none;
-  }
 }
 </style>

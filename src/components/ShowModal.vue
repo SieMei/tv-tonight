@@ -2,6 +2,7 @@
 defineProps({
   show: {
     type: Object,
+    default: null,
     required: true,
   },
 })
@@ -53,11 +54,11 @@ const emit = defineEmits(['close'])
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px); /* Modern eye-catching blur effect */
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* Ensure it's above everything */
+  z-index: 2000;
   padding: 20px;
 }
 

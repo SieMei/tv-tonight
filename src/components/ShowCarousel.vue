@@ -32,7 +32,8 @@ const emit = defineEmits(['select-show'])
 
 <style scoped>
 .carousel-container {
-  padding: 2rem 5% 0;
+  padding: 1rem 5% 0;
+  background-color: #1e1e1e;
 }
 
 .genre-title {
@@ -48,7 +49,6 @@ const emit = defineEmits(['select-show'])
   gap: 1.5rem;
   overflow-x: auto;
   padding-bottom: 1rem;
-  /* Standard scrollbar styling */
   scrollbar-width: thin;
   scrollbar-color: #007bff transparent;
 }

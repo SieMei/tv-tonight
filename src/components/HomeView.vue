@@ -41,18 +41,14 @@ const clearSearch = () => {
 }
 
 const openModal = async (show) => {
-  try {
-    const fullDetails = await tvService.getShowWithCast(show.id)
-    selectedShow.value = fullDetails
-    // Prevent the background from scrolling while modal is open
-    document.body.style.overflow = 'hidden'
-  } catch (err) {
-    console.error('Could not fetch details', err)
-  }
+  const fullDetails = await tvService.getShowWithCast(show.id)
+  selectedShow.value = fullDetails
+  document.body.style.overflow = 'hidden'
 }
+
 const closeModal = () => {
   selectedShow.value = null
-  document.body.style.overflow = 'auto'
+  document.body.style.overflow = ''
 }
 
 const loadDashboardData = async () => {
@@ -124,18 +120,16 @@ onMounted(() => {
         :background-override="featuredBg"
         @view-details="openModal(featuredShow)"
       />
-    </div>
 
-    <!-- <hr class="section-divider" /> -->
-
-    <div class="genre-lists">
-      <ShowCarousel
-        v-for="(shows, genre) in showsByGenre"
-        :key="genre"
-        :title="genre"
-        :shows="shows"
-        @select-show="openModal"
-      />
+      <div class="genre-lists">
+        <ShowCarousel
+          v-for="(shows, genre) in showsByGenre"
+          :key="genre"
+          :title="genre"
+          :shows="shows"
+          @select-show="openModal"
+        />
+      </div>
     </div>
   </div>
 
@@ -144,7 +138,7 @@ onMounted(() => {
 
 <style scoped>
 .home-dashboard {
-  padding-bottom: 50px;
+  padding-bottom: 2rem;
 }
 .loading-state,
 .error-state {
@@ -166,7 +160,7 @@ onMounted(() => {
 
 .search-results-area {
   padding-top: 2rem;
-  background-color: #1a1a1a; /* Slightly lighter dark background to make it stand out */
+  background-color: #1a1a1a;
 }
 
 .search-list {
@@ -188,7 +182,7 @@ onMounted(() => {
 }
 
 .search-item:hover {
-  background-color: #252525; /* Subtle highlight on hover */
+  background-color: #252525;
 }
 
 .result-title {
