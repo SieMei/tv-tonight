@@ -24,6 +24,10 @@ export const tvService = {
     return fetchFromApi(`/shows/${id}?embed[]=cast&embed[]=episodes`)
   },
 
+  async getEpisodesByShowId(id) {
+    return fetchFromApi(`/shows/${id}/episodes`)
+  },
+
   // Methods for filtering shows by genre and status
   async getShowsByGenre(genre, limit = 12) {
     const shows = await this.getShows(0)

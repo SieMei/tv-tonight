@@ -69,6 +69,7 @@ const emit = defineEmits(['select-show'])
 .poster-wrapper {
   position: relative;
   aspect-ratio: 2 / 3;
+  width: 100%;
   background-color: #222;
   border-radius: 8px;
   overflow: hidden;

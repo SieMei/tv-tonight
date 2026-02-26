@@ -15,7 +15,7 @@ const onSearch = (query) => {
       </div>
       <SearchBar @search="onSearch" />
     </div>
-    <div class="tagline">What are you in the mood for?</div>
+    <div class="tagline">&ndash; What are you in the mood for? &ndash;</div>
   </header>
 </template>
 

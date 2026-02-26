@@ -21,8 +21,8 @@ const emit = defineEmits(['view-details'])
         <span class="recommendation-tag">EDITOR'S PICK</span>
         <h1 class="title">{{ show.name }}</h1>
         <div class="meta">
-          <span class="rating"> &#9733; {{ show.rating?.average || 'N/A' }}</span>
-          <span class="genres">{{ show.genres?.join(' • ') }}</span>
+          <span> &#9733; {{ show.rating?.average || 'N/A' }}</span>
+          <span>{{ show.genres?.join(' • ') }}</span>
         </div>
         <div class="summary" v-html="show.summary"></div>
         <button class="info-button" @click="emit('view-details')">More info</button>
@@ -77,6 +77,7 @@ const emit = defineEmits(['view-details'])
 .meta {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
   margin-bottom: 1rem;
   font-weight: bold;
 }

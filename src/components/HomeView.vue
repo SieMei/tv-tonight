@@ -41,8 +41,12 @@ const clearSearch = () => {
 }
 
 const openModal = async (show) => {
-  const fullDetails = await tvService.getShowWithCast(show.id)
-  selectedShow.value = fullDetails
+  const [fullDetails, episodes] = await Promise.all([
+    tvService.getShowWithCast(show.id),
+    tvService.getEpisodesByShowId(show.id),
+  ])
+
+  selectedShow.value = { ...fullDetails, episodeCount: episodes.length }
   document.body.style.overflow = 'hidden'
 }
 
@@ -156,6 +160,9 @@ onMounted(() => {
 .error-state {
   color: #ff6b6b;
 }
+.dashboard-content {
+  position: relative;
+}
 
 .search-status,
 .no-results {
@@ -166,6 +173,9 @@ onMounted(() => {
 }
 
 .search-results-area {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
   padding: 2rem 0;
   background-color: #0a0a0a;
   border-bottom: 2px solid #333;
@@ -194,10 +204,10 @@ onMounted(() => {
 }
 
 .result-thumbnail {
-  width: 50px;
-  height: 70px;
+  width: 60px;
+  height: 84px;
   background-color: #222;
-  flex-shrink: 0; /* Prevents the image from being squeezed */
+  flex-shrink: 0;
   border-radius: 4px;
   overflow: hidden;
   display: flex;

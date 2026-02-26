@@ -36,7 +36,7 @@ const emit = defineEmits(['close'])
           <div class="summary" v-html="show.summary"></div>
 
           <div class="extra-info">
-            <p><strong>Language:</strong> {{ show.language }}</p>
+            <p><strong>Number of episodes:</strong> {{ show.episodeCount ?? 'N/A' }}</p>
             <p v-if="show.network"><strong>Network:</strong> {{ show.network.name }}</p>
             <p v-if="show.premiered"><strong>Premiered:</strong> {{ show.premiered }}</p>
           </div>
@@ -107,6 +107,7 @@ h2 {
 .meta {
   display: flex;
   gap: 20px;
+  align-items: center;
   margin-bottom: 20px;
   color: #bbb;
 }
