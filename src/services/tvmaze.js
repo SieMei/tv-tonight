@@ -28,19 +28,11 @@ export const tvService = {
     return fetchFromApi(`/shows/${id}/episodes`)
   },
 
-  // Methods for filtering shows by genre and status
+  // Methods for filtering shows by genre and sorting by rating
   async getShowsByGenre(genre, limit = 12) {
     const shows = await this.getShows(0)
     return shows
       .filter((show) => show.genres?.includes(genre))
-      .filter((show) => show.rating?.average)
-      .sort((a, b) => b.rating.average - a.rating.average)
-      .slice(0, limit)
-  },
-  async getShowsByType(type, limit = 12) {
-    const shows = await this.getShows(0)
-    return shows
-      .filter((show) => show.type === type)
       .filter((show) => show.rating?.average)
       .sort((a, b) => b.rating.average - a.rating.average)
       .slice(0, limit)
@@ -57,16 +49,6 @@ export const tvService = {
         .sort((a, b) => b.rating.average - a.rating.average)
         .slice(0, showsPerGenre)
     })
-
     return result
-  },
-
-  async getRunningShows(limit = 20) {
-    const shows = await this.getShows(0)
-    return shows
-      .filter((show) => show.status === 'Running')
-      .filter((show) => show.rating?.average)
-      .sort((a, b) => b.rating.average - a.rating.average)
-      .slice(0, limit)
   },
 }

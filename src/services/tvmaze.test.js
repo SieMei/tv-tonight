@@ -109,7 +109,7 @@ describe('tvService', () => {
 
     const result = await tvService.getShowsByGenre('Drama', 2)
 
-    expect(result).toHaveLength(2) // Alleen top 2
+    expect(result).toHaveLength(2)
     expect(result[0].name).toBe('Show A')
     expect(result[1].name).toBe('Show B')
   })
@@ -152,50 +152,6 @@ describe('tvService', () => {
 
     expect(result.Drama).toHaveLength(1)
     expect(result.Horror).toHaveLength(0)
-  })
-
-  test('filter only running shows and sort by rating', async () => {
-    const mockShows = [
-      { id: 1, name: 'Running Show A', status: 'Running', rating: { average: 9.0 } },
-      { id: 2, name: 'Ended Show', status: 'Ended', rating: { average: 9.5 } },
-      { id: 3, name: 'Running Show B', status: 'Running', rating: { average: 8.5 } },
-      { id: 4, name: 'Running Show C', status: 'Running', rating: { average: null } },
-    ]
-
-    globalThis.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockShows),
-      }),
-    )
-
-    const result = await tvService.getRunningShows(10)
-
-    expect(result).toHaveLength(2)
-    expect(result[0].name).toBe('Running Show A')
-    expect(result[1].name).toBe('Running Show B')
-    expect(result.every((show) => show.status === 'Running')).toBe(true)
-    expect(result.some((show) => show.id === 2)).toBe(false)
-    expect(result.some((show) => show.id === 4)).toBe(false)
-  })
-
-  test('limit number of returned running shows', async () => {
-    const mockShows = [
-      { id: 1, name: 'Show A', status: 'Running', rating: { average: 9.0 } },
-      { id: 2, name: 'Show B', status: 'Running', rating: { average: 8.5 } },
-      { id: 3, name: 'Show C', status: 'Running', rating: { average: 8.0 } },
-    ]
-
-    globalThis.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockShows),
-      }),
-    )
-
-    const result = await tvService.getRunningShows(2)
-
-    expect(result).toHaveLength(2) // Alleen top 2
   })
 
   test('skip shows without genres during genre filtering', async () => {

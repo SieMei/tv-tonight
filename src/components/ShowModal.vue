@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   show: {
     type: Object,
     default: null,
@@ -8,6 +10,10 @@ defineProps({
 })
 
 const emit = defineEmits(['close'])
+
+const cast = computed(() => {
+  return (props.show?._embedded?.cast || props.show?.cast || []).slice(0, 5)
+})
 </script>
 
 <template>
@@ -34,6 +40,18 @@ const emit = defineEmits(['close'])
           </div>
 
           <div class="summary" v-html="show.summary"></div>
+
+          <div class="cast-section" v-if="cast.length">
+            <h3>Main cast</h3>
+            <div class="cast-list">
+              <div v-for="member in cast" :key="member.person.id" class="cast-member">
+                <span class="actor-name">{{ member.person.name }}</span>
+                <span class="character-name" v-if="member.character?.name">
+                  as {{ member.character.name }}</span
+                >
+              </div>
+            </div>
+          </div>
 
           <div class="extra-info">
             <p><strong>Number of episodes:</strong> {{ show.episodeCount ?? 'N/A' }}</p>
@@ -70,7 +88,7 @@ const emit = defineEmits(['close'])
   max-height: 90vh;
   border-radius: 12px;
   position: relative;
-  overflow-y: auto; /* Scroll if content is too long */
+  overflow-y: auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -88,7 +106,7 @@ const emit = defineEmits(['close'])
 
 .modal-body {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* 1/3 poster, 2/3 text */
+  grid-template-columns: 1fr 2fr;
   gap: 30px;
   padding: 40px;
 }
@@ -126,17 +144,48 @@ h2 {
   margin: 20px 0;
 }
 
+.cast-section {
+  margin-bottom: 20px;
+}
+
+.cast-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.cast-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cast-member {
+  background: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.character-name {
+  color: #bbb;
+}
+
 .extra-info p {
   margin: 5px 0;
   color: #999;
   font-size: 0.9rem;
 }
 
-/* Mobile optimization */
 @media (max-width: 768px) {
+  .modal-content {
+    max-height: 80vh;
+  }
   .modal-body {
     grid-template-columns: 1fr;
     padding: 20px;
+    padding-bottom: 60px;
+    gap: 20px;
   }
   .poster-container {
     max-width: 200px;

@@ -25,7 +25,7 @@ const emit = defineEmits(['view-details'])
           <span>{{ show.genres?.join(' • ') }}</span>
         </div>
         <div class="summary" v-html="show.summary"></div>
-        <button class="info-button" @click="emit('view-details')">More info</button>
+        <button class="info-button" @click="emit('view-details')">Discover</button>
       </div>
     </div>
   </section>
@@ -46,7 +46,6 @@ const emit = defineEmits(['view-details'])
   width: 100%;
   height: 100%;
   background: rgba(27, 26, 26, 0.5);
-
   display: flex;
   align-items: flex-end;
   padding: 4rem 5%;
