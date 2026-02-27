@@ -1,50 +1,59 @@
-# tv-tonight
+# TV Tonight
 
-This template should help get you started developing with Vue 3 in Vite.
+TV Tonigh is an application for browsing TV shows, built with Vue 3. Shows are fetched from the [TVmaze public API](https://www.tvmaze.com/api) and presented in a clear, dark-themed interface.
 
-## Recommended IDE Setup
+## Live demo
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[tvtonight.netlify.app](https://tvtonight.netlify.app)
 
-## Recommended Browser Setup
+## Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Browse top-rated shows organised by genre (Drama, Comedy, Crime, Action, Science-Fiction)
+- Clicking on a show card brings up a modal with detailed information (like summary, number of episodes, main cast)
+- Recommended show ('Editor's Pick') in hero section (hardcoded)
+- Search for any show by title
+- Responsive layout for mobile and desktop
 
-## Customize configuration
+## Tech stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+- Vue 3 (Composition API) | Front-end framework
+- Vite | Build tool and dev server
+- Vitest | Unit testing
+- Vue Test Utils | Component testing
+- TVmaze API | Show data
 
-```sh
+## Architectural decisions
+
+I chose Vue 3 because I'm familiar with the framework, because I like it ease of use and flexibility and (last but not least) because it's the framework the company uses.
+
+It's a framework that works well for a data-driven application like this one. The show cards, genre carousels and detail modal receive their content as props and re-render automatically when the underlying data changes. Vue's reactivity system makes this a straightforward process.
+
+## Getting started
+
+**Prerequisites:** Node.js
+
+```bash
+# Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Start the development server
 npm run dev
-```
 
-### Compile and Minify for Production
+# Run tests
+npm run test:unit
 
-```sh
+# Build for production
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Assignment requirements
 
-```sh
-npm run test:unit
-```
+There were a number of criteria for this project:
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Dashboard to display horizontal lists of TV shows based on genre and rating
+- A show's details should be displayed when the user clicks on a TV show
+- Ability to search for shows
+- Application must be responsive and mobile friendly
+- Simple yet eye-catching UI
+- Include unit tests
